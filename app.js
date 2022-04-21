@@ -28,7 +28,9 @@ const TriviaModel = (function(){
     //persistencia de datos
     const data = {
         questions : [],
-        users : []
+        users : [],
+        currentQuestion : {},
+        currentUser: {}
     }
 
     return {
@@ -40,10 +42,23 @@ const TriviaModel = (function(){
             return data.questions;
         },
 
+        setCurrentQuestion(question){
+            data.currentQuestion = question;
+        },
+
+        getCurrentQuestion(){
+            return data.currentQuestion;
+        },
+        createUser(){
+
+        },
+
         getRandomQuestion: function(category){
             let catQuestions = data.questions.filter(q => q.category == category);
             const random = Math.floor(Math.random() * catQuestions.length);
-            return catQuestions[random];
+            const randomQuestion = catQuestions[random];
+            data.currentQuestion = randomQuestion;
+            return randomQuestion;
         }
     }
 
@@ -127,8 +142,8 @@ const UI = (function(){
 
             //ordenar respuestas de manera aleatoria
             let answersArray = [];
-            for (const answer in answers) {
-                answersArray.push(answer);
+            for (const key in answers) {
+                answersArray.push(answers[key]);
             }
             answersArray = shuffleAnswers(answersArray);
             
@@ -171,15 +186,55 @@ const App = (function(UI){
 
     const loadQuestion = function(){
         let question = TriviaModel.getRandomQuestion('Facil');
+
         //Mostrar pregunta y respuestas en pantalla
         UI.showQuestion(question);
     }
 
     //selección de respuesta
     const answerSelected = function(e){
-
-        console.log(e.target);
+        let currentQuestion = TriviaModel.getCurrentQuestion();
+        let answer = e.target.value;
+        //revisa si respondio correctamente o no
+        if(answer == currentQuestion.rv){
+            const category = currentQuestion.category;
+            showNewQuestion(category);
+        }else{
+            endGame();
+        }
+        loadEventListeners();
     }
+
+    //mostrar pregunta dependiendo la categoria
+    const showNewQuestion = function(category){
+        console.log(category)
+        let question;
+        switch (category) {
+            case 'Facil':
+                question = TriviaModel.getRandomQuestion('Medio');
+                UI.showQuestion(question);
+            case 'Medio':
+                question = TriviaModel.getRandomQuestion('Dificil');
+                UI.showQuestion(question);
+                break;
+            case 'Dificil':
+                question = TriviaModel.getRandomQuestion('Muy dificil');
+                UI.showQuestion(question);
+                break;
+            case 'Muy dificil':
+                question = TriviaModel.getRandomQuestion('Legendario');
+                UI.showQuestion(question);
+                break;
+            case 'Legendario':
+                endGame();
+                break;
+        }
+    }
+
+    //finalización de juego
+    const endGame = function(){
+        UI.switchScreen('trivia','end-game');
+    };
 
     //cambio entre ventanas
     const switchScreen = function(e){
