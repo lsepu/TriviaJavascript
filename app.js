@@ -1,7 +1,6 @@
 
 
 //Storage
-
 const Storage= (function(){
     return {
         getQuestions : async function(){
@@ -78,7 +77,14 @@ const UI = (function(){
          triviaQuestion: '#trivia__question',
 
          //div respuestas
-         triviaAnswers: '#trivia__answers--id'
+         triviaAnswers: '#trivia__answers--id',
+
+         //btn respuestas
+         selectAnswerZero: '#rta0',
+         selectAnswerOne: '#rta1',
+         selectAnswerTwo: '#rta2',
+         selectAnswerThree: '#rta3',
+
     }
 
     //respuesta en posiciones random
@@ -118,7 +124,6 @@ const UI = (function(){
 
             //obtener respuestas
             const {question, category, ...answers} = questionObject;
-            console.log(answers);
 
             //ordenar respuestas de manera aleatoria
             let answersArray = [];
@@ -128,7 +133,7 @@ const UI = (function(){
             answersArray = shuffleAnswers(answersArray);
             
             //pintar opciones de respuesta
-            answersArray.forEach(answer => html+= `<input class="trivia__answer" type="button" value="${answer}">`);
+            answersArray.forEach((answer,index) => html+= `<input id="rta${index}" class="trivia__answer" type="button" value="${answer}">`);
             document.querySelector(UISelectors.triviaAnswers).innerHTML = html;
      
         }
@@ -147,7 +152,7 @@ const App = (function(UI){
         document.querySelector(UISelectors.playBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.rankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.configurationBtn).addEventListener('click', switchScreen);
-        document.querySelector(UISelectors.playUserBtn).addEventListener('click', playGame);
+        document.querySelector(UISelectors.playUserBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.exitTriviaBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.sendBtn).addEventListener('click', switchScreen);
 
@@ -155,24 +160,25 @@ const App = (function(UI){
         document.querySelector(UISelectors.backEndGameBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backRankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backConfigurationBtn).addEventListener('click', switchScreen);
+
+        //selección de respuesta
+        document.querySelector(UISelectors.selectAnswerZero).addEventListener('click', answerSelected);
+        document.querySelector(UISelectors.selectAnswerOne).addEventListener('click', answerSelected);
+        document.querySelector(UISelectors.selectAnswerTwo).addEventListener('click', answerSelected);
+        document.querySelector(UISelectors.selectAnswerThree).addEventListener('click', answerSelected);
+        
     }
 
-    //Comenzar juego
-    const playGame = function(e){
-        //mostrar pregunta facíl inicial
-        
-        //obtener pregunta desde modelo
+    const loadQuestion = function(){
         let question = TriviaModel.getRandomQuestion('Facil');
-        //Mostrar pregunta y resputestas en pantalla
+        //Mostrar pregunta y respuestas en pantalla
         UI.showQuestion(question);
-
-
-        switchScreen(e);
     }
 
     //selección de respuesta
     const answerSelected = function(e){
 
+        console.log(e.target);
     }
 
     //cambio entre ventanas
@@ -231,6 +237,9 @@ const App = (function(UI){
             
             //cargar en modelo
             await initQuestions();
+
+            //añadir primera pregunta a pantalla de trivia
+            loadQuestion();
 
             //carga de event listeners
             loadEventListeners();
