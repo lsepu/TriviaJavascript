@@ -73,6 +73,24 @@ const UI = (function(){
          //Botones de configuración
          sendBtn: '#sendBtn',
          backConfigurationBtn: '#backConfigurationBtn',
+
+         //label pregunta
+         triviaQuestion: '#trivia__question',
+
+         //div respuestas
+         triviaAnswers: '#trivia__answers--id'
+    }
+
+    //respuesta en posiciones random
+    const shuffleAnswers = function(answers){
+        for (let i = answers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = answers[i];
+            answers[i] = answers[j];
+            answers[j] = temp;
+          }
+      
+          return answers;
     }
 
     //Metodos públicos
@@ -91,6 +109,29 @@ const UI = (function(){
             document.querySelector(`#${screenToShow}`).classList.add('showScreen');
 
         },
+
+        showQuestion : function(questionObject){
+            let html = '';
+            //pintar pregunta
+            let questionLabel = document.querySelector(UISelectors.triviaQuestion);
+            questionLabel.textContent = questionObject.question;
+
+            //obtener respuestas
+            const {question, category, ...answers} = questionObject;
+            console.log(answers);
+
+            //ordenar respuestas de manera aleatoria
+            let answersArray = [];
+            for (const answer in answers) {
+                answersArray.push(answer);
+            }
+            answersArray = shuffleAnswers(answersArray);
+            
+            //pintar opciones de respuesta
+            answersArray.forEach(answer => html+= `<input class="trivia__answer" type="button" value="${answer}">`);
+            document.querySelector(UISelectors.triviaAnswers).innerHTML = html;
+     
+        }
     }
 
 })();
@@ -103,10 +144,10 @@ const App = (function(UI){
         const UISelectors = UI.getSelectors();
 
         //cambiar pantalla
-        document.querySelector(UISelectors.playBtn).addEventListener('click', playGame);
+        document.querySelector(UISelectors.playBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.rankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.configurationBtn).addEventListener('click', switchScreen);
-        document.querySelector(UISelectors.playUserBtn).addEventListener('click', switchScreen);
+        document.querySelector(UISelectors.playUserBtn).addEventListener('click', playGame);
         document.querySelector(UISelectors.exitTriviaBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.sendBtn).addEventListener('click', switchScreen);
 
@@ -119,8 +160,12 @@ const App = (function(UI){
     //Comenzar juego
     const playGame = function(e){
         //mostrar pregunta facíl inicial
+        
+        //obtener pregunta desde modelo
         let question = TriviaModel.getRandomQuestion('Facil');
-        console.log(question);
+        //Mostrar pregunta y resputestas en pantalla
+        UI.showQuestion(question);
+
 
         switchScreen(e);
     }

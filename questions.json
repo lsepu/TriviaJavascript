@@ -1,6 +1,6 @@
 [
     {
-        "q" : "test question 1",
+        "question" : "test question 1",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -8,7 +8,7 @@
         "category" : "Facil"
     },
     {
-        "q" : "test question 2",
+        "question" : "test question 2",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -16,7 +16,7 @@
         "category" : "Facil"
     },
     {
-        "q" : "test question 3",
+        "question" : "test question 3",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -24,7 +24,7 @@
         "category" : "Medio"
     },
     {
-        "q" : "test question 4",
+        "question" : "test question 4",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -32,7 +32,7 @@
         "category" : "Medio"
     },
     {
-        "q" : "test question 5",
+        "question" : "test question 5",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -40,7 +40,7 @@
         "category" : "Dificil"
     },
     {
-        "q" : "test question 6",
+        "question" : "test question 6",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -48,7 +48,7 @@
         "category" : "Dificil"
     },
     {
-        "q" : "test question 7",
+        "question" : "test question 7",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -56,7 +56,7 @@
         "category" : "Muy dificil"
     },
     {
-        "q" : "test question 8",
+        "question" : "test question 8",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -64,7 +64,7 @@
         "category" : "Muy dificil"
     },
     {
-        "q" : "test question 9",
+        "question" : "test question 9",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
@@ -72,7 +72,7 @@
         "category" : "Legendario"
     },
     {
-        "q" : "test question 10",
+        "question" : "test question 10",
         "r1" : "test answer",
         "r2" : "test answer",
         "r3" : "test answer",
