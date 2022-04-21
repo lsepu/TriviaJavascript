@@ -1,5 +1,54 @@
-//Model
 
+
+//Storage
+
+const Storage= (function(){
+    return {
+        getQuestions : async function(){
+            let res = await fetch('questions.json');
+            let questions = await res.json();
+            return questions;
+        }
+    }
+})();
+
+//Model
+const TriviaModel = (function(){
+
+    //Constructor de pregunta
+    const Question = function(){
+
+    }
+
+    //Constructor de usuario
+    const User = function(name, points){
+        this.name = name;
+        this.points = points;
+    }
+
+    //persistencia de datos
+    const data = {
+        questions : [],
+        users : []
+    }
+
+    return {
+        setQuestions : function(questions){
+            data.questions = questions;
+        },
+
+        getQuestions: function(){
+            return data.questions;
+        },
+
+        getRandomQuestion: function(category){
+            let catQuestions = data.questions.filter(q => q.category == category);
+            const random = Math.floor(Math.random() * catQuestions.length);
+            return catQuestions[random];
+        }
+    }
+
+})();
 
 //View
 const UI = (function(){
@@ -54,7 +103,7 @@ const App = (function(UI){
         const UISelectors = UI.getSelectors();
 
         //cambiar pantalla
-        document.querySelector(UISelectors.playBtn).addEventListener('click', switchScreen);
+        document.querySelector(UISelectors.playBtn).addEventListener('click', playGame);
         document.querySelector(UISelectors.rankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.configurationBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.playUserBtn).addEventListener('click', switchScreen);
@@ -65,6 +114,20 @@ const App = (function(UI){
         document.querySelector(UISelectors.backEndGameBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backRankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backConfigurationBtn).addEventListener('click', switchScreen);
+    }
+
+    //Comenzar juego
+    const playGame = function(e){
+        //mostrar pregunta facíl inicial
+        let question = TriviaModel.getRandomQuestion('Facil');
+        console.log(question);
+
+        switchScreen(e);
+    }
+
+    //selección de respuesta
+    const answerSelected = function(e){
+
     }
 
     //cambio entre ventanas
@@ -111,9 +174,18 @@ const App = (function(UI){
         }
     }
 
+    //cargar preguntas en modelo
+    const initQuestions = async function(){
+       let questions = await Storage.getQuestions();
+       TriviaModel.setQuestions(questions);
+    }
+
     // Metodos públicos
     return {
-        init: function(){
+        init: async function(){
+            
+            //cargar en modelo
+            await initQuestions();
 
             //carga de event listeners
             loadEventListeners();
@@ -121,7 +193,7 @@ const App = (function(UI){
         }
     }
 
-})(UI);
+})(UI, TriviaModel);
 
 //Inicializar app
 App.init();
