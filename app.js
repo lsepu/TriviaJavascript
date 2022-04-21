@@ -64,6 +64,7 @@ const TriviaModel = (function(){
 
 })();
 
+
 //View
 const UI = (function(){
     const UISelectors = {
@@ -81,7 +82,7 @@ const UI = (function(){
          //Botón volver a menu desde finalización de trivia
          backEndGameBtn : '#backEndGameBtn',
 
-         //Botón colcer a menu desde ranking
+         //Botón volver a menu desde ranking
          backRankingBtn : '#backRankingBtn',
 
          //Botones de configuración
@@ -168,7 +169,7 @@ const App = (function(UI){
         document.querySelector(UISelectors.rankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.configurationBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.playUserBtn).addEventListener('click', switchScreen);
-        document.querySelector(UISelectors.exitTriviaBtn).addEventListener('click', switchScreen);
+        document.querySelector(UISelectors.exitTriviaBtn).addEventListener('click', endGame);
         document.querySelector(UISelectors.sendBtn).addEventListener('click', switchScreen);
 
         //volver a menu
@@ -184,11 +185,12 @@ const App = (function(UI){
         
     }
 
-    const loadQuestion = function(){
+    const loadInitialQuestion = function(){
         let question = TriviaModel.getRandomQuestion('Facil');
 
         //Mostrar pregunta y respuestas en pantalla
         UI.showQuestion(question);
+        loadEventListeners();
     }
 
     //selección de respuesta
@@ -233,6 +235,9 @@ const App = (function(UI){
 
     //finalización de juego
     const endGame = function(){
+        console.log('fin')
+        //reiniciar nivel a facil
+        loadInitialQuestion();
         UI.switchScreen('trivia','end-game');
     };
 
@@ -294,10 +299,10 @@ const App = (function(UI){
             await initQuestions();
 
             //añadir primera pregunta a pantalla de trivia
-            loadQuestion();
+            loadInitialQuestion();
 
             //carga de event listeners
-            loadEventListeners();
+            //loadEventListeners();
 
         }
     }
