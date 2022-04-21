@@ -42,6 +42,11 @@ const TriviaModel = (function(){
             return data.questions;
         },
 
+        createUser(userName, points){
+            const user = new User(userName, points);
+            data.users.push(user);
+        },
+
         setCurrentQuestion(question){
             data.currentQuestion = question;
         },
@@ -55,6 +60,8 @@ const TriviaModel = (function(){
 
         getRandomQuestion: function(category){
             let catQuestions = data.questions.filter(q => q.category == category);
+            console.log('Entre: ' + category);
+            console.log(catQuestions);
             const random = Math.floor(Math.random() * catQuestions.length);
             const randomQuestion = catQuestions[random];
             data.currentQuestion = randomQuestion;
@@ -190,7 +197,6 @@ const App = (function(UI){
 
         //Mostrar pregunta y respuestas en pantalla
         UI.showQuestion(question);
-        loadEventListeners();
     }
 
     //selección de respuesta
@@ -204,17 +210,17 @@ const App = (function(UI){
         }else{
             endGame();
         }
-        loadEventListeners();
     }
 
     //mostrar pregunta dependiendo la categoria
     const showNewQuestion = function(category){
         console.log(category)
-        let question;
+        let question = '';
         switch (category) {
             case 'Facil':
                 question = TriviaModel.getRandomQuestion('Medio');
                 UI.showQuestion(question);
+                break;
             case 'Medio':
                 question = TriviaModel.getRandomQuestion('Dificil');
                 UI.showQuestion(question);
@@ -231,6 +237,7 @@ const App = (function(UI){
                 endGame();
                 break;
         }
+        loadEventListeners();
     }
 
     //finalización de juego
@@ -239,6 +246,7 @@ const App = (function(UI){
         //reiniciar nivel a facil
         loadInitialQuestion();
         UI.switchScreen('trivia','end-game');
+        loadEventListeners();
     };
 
     //cambio entre ventanas
@@ -302,7 +310,7 @@ const App = (function(UI){
             loadInitialQuestion();
 
             //carga de event listeners
-            //loadEventListeners();
+            loadEventListeners();
 
         }
     }
