@@ -21,13 +21,18 @@ const Storage= (function(){
 const TriviaModel = (function(){
 
     //Constructor de pregunta
-    const Question = function(){
-
+    const Question = function(question, r1, r2, r3, rv, category){
+        this.question = question;
+        this.r1 = r1;
+        this.r2 = r2;
+        this.r3 = r3;
+        this.rv = rv;
+        this.category = category;
     }
 
     //Constructor de usuario
     const User = function(name, points){
-        this.name = name;
+        this.userName = name;
         this.points = points;
     }
 
@@ -64,6 +69,10 @@ const TriviaModel = (function(){
             data.users.push(user);
             return user;
         },
+        addQuestion: function(question, r1, r2, r3, rv, category){
+            const newQuestion = new Question(question,r1,r2,r3,rv,category);
+            data.questions.push(newQuestion);
+        },
         updateUserPoints: function(points){
 
             //obtener usuario del array de usuario
@@ -81,13 +90,28 @@ const TriviaModel = (function(){
         getCurrentQuestion(){
             return data.currentQuestion;
         },
-
         getRandomQuestion: function(category){
             let catQuestions = data.questions.filter(q => q.category == category);
             const random = Math.floor(Math.random() * catQuestions.length);
             const randomQuestion = catQuestions[random];
             data.currentQuestion = randomQuestion;
             return randomQuestion;
+        },
+        getRanking: function(){
+
+            let sortUsers = data.users.sort(function(userOne, userTwo){
+                if (userOne.points < userTwo.points) {
+                    return 1;
+                }
+                if (userOne.points > userTwo.pointse) {
+                    return -1;
+                }
+                return 0;
+            })
+            //obtener 3 primeros
+            let topUsers = sortUsers.slice(0, 3);
+            return topUsers;
+
         }
     }
 
@@ -124,6 +148,9 @@ const UI = (function(){
          //div respuestas
          triviaAnswers: '#trivia__answers--id',
 
+         //div ranking
+         triviaRanking: '#trivia__ranking',
+
          //btn respuestas
          selectAnswerZero: '#rta0',
          selectAnswerOne: '#rta1',
@@ -132,7 +159,14 @@ const UI = (function(){
 
          userInput: '#user-name',
          currentPointsLabel : '#trivia__points',
-         totalPointsLabel : '#trivia__total'
+         totalPointsLabel : '#trivia__total',
+
+         //inputs creación de pregunta
+         newQuestion: '#configuration__question',
+         correctAnswer: '#configuration__correct-answer',
+         newAnswerOne: '#configuration__answer1',
+         newAnswerTwo: '#configuration__answer2',
+         newAnswerThree: '#configuration__answer3'
          
 
     }
@@ -196,6 +230,12 @@ const UI = (function(){
             answersArray.forEach((answer,index) => html+= `<input id="rta${index}" class="trivia__answer" type="button" value="${answer}">`);
             document.querySelector(UISelectors.triviaAnswers).innerHTML = html;
      
+        },
+        showRanking : function(topUsers){
+            let html = "";
+            //pintar top 3 de usuarios en html
+            topUsers.forEach(user => html+=`<p class="trivia__person" >${user.userName} : ${user.points} puntos</p>`);
+            document.querySelector(UISelectors.triviaRanking).innerHTML = html;
         }
     }
 
@@ -208,11 +248,11 @@ const App = (function(UI){
     const loadEventListeners = function(){
         const UISelectors = UI.getSelectors();
         document.querySelector(UISelectors.playBtn).addEventListener('click', switchScreen);
-        document.querySelector(UISelectors.rankingBtn).addEventListener('click', switchScreen);
+        document.querySelector(UISelectors.rankingBtn).addEventListener('click', ranking);
         document.querySelector(UISelectors.configurationBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.playUserBtn).addEventListener('click', userToPlay);
         document.querySelector(UISelectors.exitTriviaBtn).addEventListener('click', endGame);
-        document.querySelector(UISelectors.sendBtn).addEventListener('click', switchScreen);
+        document.querySelector(UISelectors.sendBtn).addEventListener('click', createQuestion);
         document.querySelector(UISelectors.backEndGameBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backRankingBtn).addEventListener('click', switchScreen);
         document.querySelector(UISelectors.backConfigurationBtn).addEventListener('click', switchScreen);
@@ -221,6 +261,59 @@ const App = (function(UI){
         document.querySelector(UISelectors.selectAnswerOne).addEventListener('click', answerSelected);
         document.querySelector(UISelectors.selectAnswerTwo).addEventListener('click', answerSelected);
         document.querySelector(UISelectors.selectAnswerThree).addEventListener('click', answerSelected);   
+    }
+
+    //cambio entre ventanas
+    const switchScreen = function(e){
+        const btnPressed = e.target.id;
+        switch(btnPressed){
+            case 'playBtn':
+                UI.switchScreen('menu','new-player');
+                break;
+            case 'rankingBtn':
+                UI.switchScreen('menu','ranking');
+                break;
+            case 'configurationBtn':
+                UI.switchScreen('menu','add-question');
+                break;
+            case 'playUserBtn':
+                UI.switchScreen('new-player', 'trivia');
+                break;
+            case 'exitTriviaBtn':
+                UI.switchScreen('trivia', 'end-game');
+                break;
+            case 'sendBtn':
+                UI.switchScreen('add-question', 'menu');
+                break;
+            case 'backEndGameBtn':
+                UI.switchScreen('end-game','menu');
+                break;
+            case 'backRankingBtn':
+                UI.switchScreen('ranking','menu');
+                break;
+            case'backConfigurationBtn':
+                UI.switchScreen('add-question','menu');
+                break;
+        }
+    }
+
+    //crear nueva pregunta
+    const createQuestion = function(){
+        let question = document.querySelector(UI.getSelectors().newQuestion);
+        let r1 = document.querySelector(UI.getSelectors().newAnswerOne);
+        let r2 = document.querySelector(UI.getSelectors().newAnswerTwo);
+        let r3 = document.querySelector(UI.getSelectors().newAnswerThree);
+        let rc = document.querySelector(UI.getSelectors().correctAnswer);
+        let category = 'Facil';
+
+        TriviaModel.addQuestion(question.value ,r1.value ,r2.value ,r3.value ,rc.value ,category);
+        question.value ="";
+        r1.value = "";
+        r2.value = "";
+        r3.value = "";
+        rc.value = "";
+        console.log(TriviaModel.getQuestions());
+        UI.switchScreen('add-question','menu')
     }
 
     const loadInitialQuestion = function(){
@@ -253,6 +346,13 @@ const App = (function(UI){
         }else{
             endGame();
         }
+    }
+
+    //ranking de usuarios
+    const ranking = function(){
+        const topThree = TriviaModel.getRanking();
+        UI.showRanking(topThree);
+        UI.switchScreen('menu','ranking');
     }
 
     //mostrar pregunta dependiendo la categoria
@@ -296,39 +396,7 @@ const App = (function(UI){
         loadEventListeners();
     };
 
-    //cambio entre ventanas
-    const switchScreen = function(e){
-        const btnPressed = e.target.id;
-        switch(btnPressed){
-            case 'playBtn':
-                UI.switchScreen('menu','new-player');
-                break;
-            case 'rankingBtn':
-                UI.switchScreen('menu','ranking');
-                break;
-            case 'configurationBtn':
-                UI.switchScreen('menu','add-question');
-                break;
-            case 'playUserBtn':
-                UI.switchScreen('new-player', 'trivia');
-                break;
-            case 'exitTriviaBtn':
-                UI.switchScreen('trivia', 'end-game');
-                break;
-            case 'sendBtn':
-                UI.switchScreen('add-question', 'menu');
-                break;
-            case 'backEndGameBtn':
-                UI.switchScreen('end-game','menu');
-                break;
-            case 'backRankingBtn':
-                UI.switchScreen('ranking','menu');
-                break;
-            case'backConfigurationBtn':
-                UI.switchScreen('add-question','menu');
-                break;
-        }
-    }
+    
 
     //cargar preguntas en modelo
     const initInformation = async function(){
