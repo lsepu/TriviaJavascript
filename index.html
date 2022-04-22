@@ -78,7 +78,7 @@
     <!--Add question-->
     <div id="add-question" class="container-fluid trivia__wrapper hideScreen">
 
-        <div class="trivia__container">
+        <div class="trivia__container" style="margin: -50px auto;">
 
             <h3>Pregunta: </h3>
             <input id="configuration__question" class="trivia__input" type="text" name="" id="">
@@ -92,6 +92,14 @@
             <input id="configuration__answer2" class="trivia__input" type="text" placeholder="Respuesta" name="" id="">
 
             <input id="configuration__answer3" class="trivia__input" type="text" placeholder="Respuesta" name="" id="">
+
+            <select name="categories" id="trivia__categories" >
+                <option value="Facil">Facil</option>
+                <option value="Medio">Medio</option>
+                <option value="Dificil">Dificil</option>
+                <option value="Muy dificil">Muy dificil</option>
+                <option value="Legendario">Legendario</option>
+              </select>
 
             <div style="display: flex;">
                 <button id="sendBtn" class="trivia__btn" style="width: 100%;">
@@ -153,6 +161,6 @@
 
     <script type="application/json" src="questions.json"></script>
     <script type="application/json" src="users.json"></script>
-    <script src="app.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

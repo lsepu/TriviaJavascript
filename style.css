@@ -66,6 +66,13 @@
     font-weight: bold;
 }
 
+#trivia__categories{
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /*Permite mostrar la pantalla actual*/
 .showScreen {
     display: block!important;
