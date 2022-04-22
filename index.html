@@ -42,7 +42,7 @@
         <div class="trivia__container">
             <h2>Ingrese su usuario</h2>
 
-            <input class="trivia__input" type="text" name="" id="">
+            <input id="user-name" class="trivia__input" type="text" name="" id="">
 
             <button id="playUserBtn" class="trivia__btn">Jugar</button>
 
@@ -55,7 +55,7 @@
     <div id="trivia" class="container-fluid trivia__wrapper hideScreen">
 
         <div class="trivia__container" style="margin-top:0px">
-            <h2 class="trivia__ptos">0 ptos</h2>
+            <h2 id="trivia__points">0 ptos</h2>
 
             <p id="trivia__question">¿Donde queda Japón?</p>
 
@@ -142,7 +142,7 @@
         <div class="trivia__container">
             <h2>Juego finalizado</h2>
 
-            <h3 style="margin-top: 30px;">Total de puntos: 0 puntos</h3>
+            <h3 id="trivia__total" style="margin-top: 30px;">Total de puntos: 0 puntos</h3>
 
             <button id="backEndGameBtn" class="trivia__btn" style="width: 100%;">
                 Volver al menu
@@ -152,6 +152,7 @@
     </div>
 
     <script type="application/json" src="questions.json"></script>
+    <script type="application/json" src="users.json"></script>
     <script src="app.js"></script>
   </body>
 </html>
