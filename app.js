@@ -43,8 +43,12 @@ const TriviaModel = (function(){
         },
 
         createUser(userName, points){
-            const user = new User(userName, points);
+            const user = new User(userName, points);          
             data.users.push(user);
+            console.log(userName);
+        },
+        addPoints(points){
+            data.users[0].points += points;
         },
 
         setCurrentQuestion(question){
@@ -54,8 +58,9 @@ const TriviaModel = (function(){
         getCurrentQuestion(){
             return data.currentQuestion;
         },
-        createUser(){
 
+        getUser(){
+            return data.users[0];
         },
 
         getRandomQuestion: function(category){
@@ -98,6 +103,10 @@ const UI = (function(){
 
          //label pregunta
          triviaQuestion: '#trivia__question',
+         //label puntos
+         triviaPoints:'#points',
+         //label Nombre Usuario
+         triviaNameUser:'#label-name',
 
          //div respuestas
          triviaAnswers: '#trivia__answers--id',
@@ -107,6 +116,9 @@ const UI = (function(){
          selectAnswerOne: '#rta1',
          selectAnswerTwo: '#rta2',
          selectAnswerThree: '#rta3',
+
+         //input Name User
+         inputName:'#name-user',
 
     }
 
@@ -136,6 +148,7 @@ const UI = (function(){
             //mostrar pantalla
             document.querySelector(`#${screenToShow}`).classList.remove('hideScreen');
             document.querySelector(`#${screenToShow}`).classList.add('showScreen');
+            
 
         },
 
@@ -159,7 +172,20 @@ const UI = (function(){
             answersArray.forEach((answer,index) => html+= `<input id="rta${index}" class="trivia__answer" type="button" value="${answer}">`);
             document.querySelector(UISelectors.triviaAnswers).innerHTML = html;
      
-        }
+        },
+        //Funcion que Acumula los puntos
+        showPoints : function(points){
+             //pintar puntos
+            let pointsLabel = document.querySelector(UISelectors.triviaPoints);
+            pointsLabel.textContent = points;
+     
+        },
+        showNameUser : function(name){
+            //pintar Nombre usuario
+           let nameLabel = document.querySelector(UISelectors.triviaNameUser);
+           nameLabel.textContent = name;
+    
+       }
     }
 
 })();
@@ -170,6 +196,8 @@ const App = (function(UI){
     //cargar event listeners
     const loadEventListeners = function(){
         const UISelectors = UI.getSelectors();
+
+        
 
         //cambiar pantalla
         document.querySelector(UISelectors.playBtn).addEventListener('click', switchScreen);
@@ -206,6 +234,7 @@ const App = (function(UI){
         //revisa si respondio correctamente o no
         if(answer == currentQuestion.rv){
             const category = currentQuestion.category;
+            // incrementar puntaje
             showNewQuestion(category);
         }else{
             endGame();
@@ -219,18 +248,26 @@ const App = (function(UI){
         switch (category) {
             case 'Facil':
                 question = TriviaModel.getRandomQuestion('Medio');
+                TriviaModel.addPoints(10);
+                console.log(TriviaModel.getUser().points)
+                
+                UI.showPoints('Puntos Acumulados: ' + TriviaModel.getUser().points);
                 UI.showQuestion(question);
                 break;
             case 'Medio':
                 question = TriviaModel.getRandomQuestion('Dificil');
+                TriviaModel.addPoints(20);
+                UI.showPoints('Puntos Acumulados: ' + TriviaModel.getUser().points);
                 UI.showQuestion(question);
                 break;
             case 'Dificil':
                 question = TriviaModel.getRandomQuestion('Muy dificil');
+                TriviaModel.addPoints(30);
                 UI.showQuestion(question);
                 break;
             case 'Muy dificil':
                 question = TriviaModel.getRandomQuestion('Legendario');
+                TriviaModel.addPoints(40);
                 UI.showQuestion(question);
                 break;
             case 'Legendario':
@@ -267,6 +304,8 @@ const App = (function(UI){
 
             //opción de pantalla de usuario
             case 'playUserBtn':
+                TriviaModel.createUser(document.getElementById("name-user").value,0);
+                UI.showNameUser('Usuario: '+TriviaModel.getUser().name);
                 UI.switchScreen('new-player', 'trivia');
                 break;
 
@@ -303,9 +342,10 @@ const App = (function(UI){
     return {
         init: async function(){
             
+            
             //cargar en modelo
             await initQuestions();
-
+           
             //añadir primera pregunta a pantalla de trivia
             loadInitialQuestion();
 
