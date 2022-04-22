@@ -1,0 +1,203 @@
+[
+    {
+        "question" : "test question 1",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Facil"
+    },
+    {
+        "question" : "test question 2",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Facil"
+    },
+    {
+        "question" : "test question 3",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Medio"
+    },
+    {
+        "question" : "test question 4",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Medio"
+    },
+    {
+        "question" : "test question 5",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Dificil"
+    },
+    {
+        "question" : "test question 6",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Dificil"
+    },
+    {
+        "question" : "test question 7",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "test question 8",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "test question 9",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "test question 10",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "test question 11",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "test question 12",
+        "r1" : "test answer",
+        "r2" : "test answer",
+        "r3" : "test answer",
+        "rv" : "test correct answer",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "Capital de Inglaterra",
+        "r1" : "Tokio",
+        "r2" : "Boston",
+        "r3" : "Toronto",
+        "rv" : "Londres",
+        "category" : "Dificil"
+    },
+    {
+        "question" : "Dia de la independecia de Colombia",
+        "r1" : "2 Agosto",
+        "r2" : "7 septiembre",
+        "r3" : "3 Octubre",
+        "rv" : "20 Julio",
+        "category" : "Dificil"
+    },
+    {
+        "question" : "Cuantos lados tiene un exagono",
+        "r1" : "5",
+        "r2" : "1",
+        "r3" : "3",
+        "rv" : "6",
+        "category" : "Dificil"
+    },
+    {
+        "question" : "Cuantas patas tiene un gato",
+        "r1" : "6",
+        "r2" : "3",
+        "r3" : "2",
+        "rv" : "4",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "Cuál es la capital España",
+        "r1" : "Barcelona",
+        "r2" : "París",
+        "r3" : "Valencia",
+        "rv" : "Madrid",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "Cuál de los siguientes no es mamífero",
+        "r1" : "Vaca",
+        "r2" : "perro",
+        "r3" : "Gato",
+        "rv" : "Lagartija",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "Cuál de los siguientes piases no pertenece al continente europeo",
+        "r1" : "Holanda",
+        "r2" : "Francia",
+        "r3" : "Inglaterra",
+        "rv" : "Japón",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "La raíz cuadrada de 144 es:",
+        "r1" : "14",
+        "r2" : "10",
+        "r3" : "16",
+        "rv" : "12",
+        "category" : "Muy dificil"
+    },
+    {
+        "question" : "En qué continente está ubicado el país Belice",
+        "r1" : "Europa",
+        "r2" : "Asia",
+        "r3" : "África",
+        "rv" : "América",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "Cual de los siguientes pares de palabras son homófonas",
+        "r1" : "Lindo-Feo",
+        "r2" : "Feliz-Contento",
+        "r3" : "Agua - Rio",
+        "rv" : "Ahí-Hay",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "En qué país están las cataratas del Niagara",
+        "r1" : "Francia",
+        "r2" : "Brasil",
+        "r3" : "Argentina",
+        "rv" : "Canadá",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "un polígono regular es aquel",
+        "r1" : "que tiene todos sus lados desiguales",
+        "r2" : "que su perímetro es la suma sus lados",
+        "r3" : "que su área es la suma de sus lados",
+        "rv" : "que tiene todos sus lados iguales",
+        "category" : "Legendario"
+    },
+    {
+        "question" : "quién inventó la bombilla",
+        "r1" : "Isaac Newton",
+        "r2" : "Nicola Tesla",
+        "r3" : "Neil Amstrong",
+        "rv" : "Thomás Alba Edison",
+        "category" : "Legendario"
+    }
+    
+]
