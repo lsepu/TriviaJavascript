@@ -1,83 +1,98 @@
-[
-    {
-        "question" : "test question 1",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+[   
+     {
+        "question" : "De que color es la capa roja de Superman",
+        "r1" : "Cafe",
+        "r2" : "Verde",
+        "r3" : "Azul",
+        "rv" : "Roja",
         "category" : "Facil"
     },
     {
-        "question" : "test question 2",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+        "question" : "De que color eran las mangas del chaleco de Simon Bolivar",
+        "r1" : "Las Mangas eran Rojas",
+        "r2" : "Las Mangas era Azules",
+        "r3" : "Las mangas eran Doradas",
+        "rv" : "Un Chaleco no tiene mangas",
         "category" : "Facil"
     },
     {
-        "question" : "test question 3",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+        "question" : "Cuantos lados tiene un Trangulo",
+        "r1" : "4",
+        "r2" : "8",
+        "r3" : "6",
+        "rv" : "3",
+        "category" : "Facil"
+    },
+    {
+        "question" : "De que color es la Leche",
+        "r1" : "Negro",
+        "r2" : "Gris",
+        "r3" : "Azúl",
+        "rv" : "Blanco",
+        "category" : "Facil"
+    },
+    {
+        "question" : "Cuanto es 2 x 2",
+        "r1" : "2",
+        "r2" : "6",
+        "r3" : "8",
+        "rv" : "4",
+        "category" : "Facil"
+    },
+    {
+        "question" : "cual de los siguientes es un color primario",
+        "r1" : "Blanco",
+        "r2" : "Verde",
+        "r3" : "Negro",
+        "rv" : "Azul",
         "category" : "Medio"
     },
     {
-        "question" : "test question 4",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+        "question" : "Que sonido hacen los perros",
+        "r1" : "hablan",
+        "r2" : "silvan",
+        "r3" : "maullan",
+        "rv" : "ladran",
         "category" : "Medio"
     },
     {
-        "question" : "test question 5",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+        "question" : "Cual es la capital de Antioquia",
+        "r1" : "Manizales",
+        "r2" : "Bogota",
+        "r3" : "Santuario",
+        "rv" : "Medellin",
+        "category" : "Medio"
+    },
+    {
+        "question" : "Cuanto es 5 x 8",
+        "r1" : "64",
+        "r2" : "16",
+        "r3" : "25",
+        "rv" : "40",
+        "category" : "Medio"
+    },
+    {
+        "question" : "Cual es la capital de Venezuela",
+        "r1" : "Madrid",
+        "r2" : "Envigado",
+        "r3" : "Lima",
+        "rv" : "Caracas",
+        "category" : "Medio"
+    },
+    {
+        "question" : "Cuál de los siguientes no es mamífero",
+        "r1" : "Gato",
+        "r2" : "Perro",
+        "r3" : "Vaca",
+        "rv" : "Lagartija",
         "category" : "Dificil"
     },
     {
-        "question" : "test question 6",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
+        "question" : "Dia de la independecia de Colombia",
+        "r1" : "3 Octubre",
+        "r2" : "7 septiembre",
+        "r3" : "2 Agosto",
+        "rv" : "20 Julio",
         "category" : "Dificil"
-    },
-    {
-        "question" : "test question 7",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
-        "category" : "Muy dificil"
-    },
-    {
-        "question" : "test question 8",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
-        "category" : "Muy dificil"
-    },
-    {
-        "question" : "test question 9",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
-        "category" : "Legendario"
-    },
-    {
-        "question" : "test question 10",
-        "r1" : "test answer",
-        "r2" : "test answer",
-        "r3" : "test answer",
-        "rv" : "test correct answer",
-        "category" : "Legendario"
-    }
-    
+    }  
 ]
