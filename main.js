@@ -5,11 +5,13 @@ import TriviaModel from "./models/Trivia.js";
 const Storage = (function () {
   return {
     getQuestions: async function () {
+      console.log("Se cargan las pregutas del Archivo Json en un Objeto")
       let res = await fetch("data/questions.json");
       let questions = await res.json();
       return questions;
     },
     getUsers: async function () {
+      console.log("Se cargan los Usuarios que han Jugado del Archivo Json")
       let res = await fetch("data/users.json");
       let users = await res.json();
       return users;
@@ -20,6 +22,7 @@ const Storage = (function () {
 //App Controller
 const App = (function (UI) {
   //cargar event listeners
+  console.log("Carga los eventos Listener")
   const loadEventListeners = function () {
     const UISelectors = UI.getSelectors();
     document
@@ -104,6 +107,7 @@ const App = (function (UI) {
     //obtengo la nueva pregunta de la UI
     const newQuestionInfo = UI.getNewQuestionInputs();
     const [question, r1, r2, r3, rv, category] = newQuestionInfo;
+    console.log("Se crea el Objeto Pregunta")
 
     //Creación de pregunta en modelo
     TriviaModel.addQuestion(
@@ -114,8 +118,12 @@ const App = (function (UI) {
       rv.value,
       category.value
     );
+    console.log ("Se agrega una nueva pregunta a las demas preguntas")
+
+
     //limpiar inputs
     UI.clearNewQuestionInputs();
+    
 
     UI.switchScreen("add-question", "menu");
     alert("Pregunta agregada satisfactoriamente");
@@ -142,15 +150,18 @@ const App = (function (UI) {
 
   //selección de respuesta
   const answerSelected = function (e) {
-    console.log('Respuesta seleccionada');
+    console.log('Usuario Selecciona una respuesta');
     let currentQuestion = TriviaModel.getCurrentQuestion();
     let answer = e.target.value;
     //revisa si respondio correctamente o no
+    console.log("Validamos la respuesta seleccionada con la respuesta Verdadera")
     if (answer == currentQuestion.rv) {
+      console.log("La respuesta es Correcta")
       TriviaModel.addPoint();
       const category = currentQuestion.category;
       showNewQuestion(category);
     } else {
+      console.log("La respuesta es Incorrecta")
       endGame();
     }
   };
@@ -171,6 +182,7 @@ const App = (function (UI) {
 
   //mostrar pregunta dependiendo la categoria
   const showNewQuestion = function (category) {
+    
     let question = "";
     let userPoints = TriviaModel.getPoints();
     switch (category) {
@@ -195,6 +207,7 @@ const App = (function (UI) {
         UI.showQuestion(question, userPoints);
         break;
       case "Legendario":
+        console.log("El Usuario Respondio todas las Preguntas")
         endGame();
         break;
     }
@@ -203,6 +216,7 @@ const App = (function (UI) {
 
   //finalización de juego
   const endGame = function () {
+    console.log("Fin del Juego");
     let points = TriviaModel.getPoints();
     //actualizar puntos de usuario en modelo
     TriviaModel.updateUserPoints(points);

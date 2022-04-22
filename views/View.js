@@ -29,6 +29,7 @@ const UI = (function () {
 
   //respuesta en posiciones random
   const shuffleAnswers = function (answers) {
+    console.log("se ordenan las respuestas aleatoriamente")
     for (let i = answers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = answers[i];
@@ -45,6 +46,7 @@ const UI = (function () {
     },
 
     switchScreen: function (screenToHide, screenToShow) {
+      console.log("Se actualiza a la Vista")
       //ocultar pantalla
       document.querySelector(`#${screenToHide}`).classList.remove("showScreen");
       document.querySelector(`#${screenToHide}`).classList.add("hideScreen");
@@ -54,12 +56,14 @@ const UI = (function () {
     },
 
     showTotalPoints: function (points) {
+      console.log("mostrar puntos en la pantalla de finalización")
       //mostrar puntos en la pantalla de finalización
       let totalPoints = document.querySelector(UISelectors.totalPointsLabel);
       totalPoints.textContent = `Total de puntos: ${points} puntos`;
     },
 
     showQuestion: function (questionObject, points) {
+      console.log("muestra la pregunta que se debe responder ")
       let html = "";
       //pintar pregunta
       let questionLabel = document.querySelector(UISelectors.triviaQuestion);
@@ -83,9 +87,11 @@ const UI = (function () {
           (html += `<input id="rta${index}" class="trivia__answer" type="button" value="${answer}">`)
       );
       document.querySelector(UISelectors.triviaAnswers).innerHTML = html;
+      
     },
 
     showRanking: function (topUsers) {
+      console.log("Se muestra la informacion del Ranking top 3")
       let html = "";
       //pintar top 3 de usuarios en html
       topUsers.forEach(
@@ -96,6 +102,7 @@ const UI = (function () {
     },
 
     getNewQuestionInputs: function(){
+      console.log("Se obtinen los datos de los inputs para crear una nueva pregunta")
         let question = document.querySelector(UISelectors.newQuestion);
         let r1 = document.querySelector(UISelectors.newAnswerOne);
         let r2 = document.querySelector(UISelectors.newAnswerTwo);
@@ -107,6 +114,7 @@ const UI = (function () {
     },
 
     clearNewQuestionInputs: function(){
+      console.log("Limpia los Imputs para una nueva Pregunta")
         document.querySelector(UISelectors.newQuestion).value="";
         document.querySelector(UISelectors.newAnswerOne).value="";
         document.querySelector(UISelectors.newAnswerTwo).value="";

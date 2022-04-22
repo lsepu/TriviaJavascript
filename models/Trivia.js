@@ -50,6 +50,7 @@ const TriviaModel = (function () {
       data.questions.push(newQuestion);
     },
     updateUserPoints: function (points) {
+      console.log("Se actualizan los Puntos del Jugador o Usuario")
       //obtener usuario del array de usuario
       let foundUserIndex = data.users.findIndex(
         (user) => user == data.currentUser
@@ -68,6 +69,7 @@ const TriviaModel = (function () {
       return data.currentQuestion;
     },
     getRandomQuestion: function (category) {
+      console.log("Se obtiene una Pregunta al Azar")
       let catQuestions = data.questions.filter((q) => q.category == category);
       const random = Math.floor(Math.random() * catQuestions.length);
       const randomQuestion = catQuestions[random];
@@ -85,6 +87,7 @@ const TriviaModel = (function () {
         return 0;
       });
       //obtener 3 primeros
+      console.log("Se optiene el Top 3 de los Jugadores")
       let topUsers = sortUsers.slice(0, 3);
       return topUsers;
     },
