@@ -19,7 +19,6 @@ const Storage = (function () {
 
 //App Controller
 const App = (function (UI) {
-
   //cargar event listeners
   const loadEventListeners = function () {
     const UISelectors = UI.getSelectors();
@@ -125,26 +124,25 @@ const App = (function (UI) {
     console.log(TriviaModel.getQuestions());
   };
 
-  const loadInitialQuestion = function () {
-    let question = TriviaModel.getRandomQuestion("Facil");
-    //Mostrar pregunta y respuestas en pantalla
-    UI.showQuestion(question, 0);
-  };
-
   //agregar nuevo usuario o actualizar puntos de usuario existente
   const userToPlay = function () {
+    console.log('Crear usuario e iniciar nueva partida');
     const userInput = document.querySelector(UI.getSelectors().userInput);
     const userName = userInput.value;
     //se crea el nuevo objeto usuario con params: username, points
     const user = TriviaModel.addUser(userName, 0);
     TriviaModel.setCurrentUser(user);
+    
     //limpiar input
-    userInput.value = "";
+    UI.clearUserInput();
+
+    showNewQuestion("Iniciar");
     UI.switchScreen("new-player", "trivia");
   };
 
   //selección de respuesta
   const answerSelected = function (e) {
+    console.log('Respuesta seleccionada');
     let currentQuestion = TriviaModel.getCurrentQuestion();
     let answer = e.target.value;
     //revisa si respondio correctamente o no
@@ -164,11 +162,22 @@ const App = (function (UI) {
     UI.switchScreen("menu", "ranking");
   };
 
+  /*  const loadInitialQuestion = function () {
+    let question = TriviaModel.getRandomQuestion("Facil");
+    //Mostrar pregunta y respuestas en pantalla
+    UI.showQuestion(question, 0);
+    loadEventListeners();
+  }; */
+
   //mostrar pregunta dependiendo la categoria
   const showNewQuestion = function (category) {
     let question = "";
     let userPoints = TriviaModel.getPoints();
     switch (category) {
+      case "Iniciar":
+        question = TriviaModel.getRandomQuestion("Facil");
+        UI.showQuestion(question, 0);
+        break;
       case "Facil":
         question = TriviaModel.getRandomQuestion("Medio");
         UI.showQuestion(question, userPoints);
@@ -197,8 +206,6 @@ const App = (function (UI) {
     let points = TriviaModel.getPoints();
     //actualizar puntos de usuario en modelo
     TriviaModel.updateUserPoints(points);
-    //reiniciar nivel a facil
-    loadInitialQuestion();
     //mostrar puntos totales
     UI.showTotalPoints(points);
     UI.switchScreen("trivia", "end-game");
@@ -215,10 +222,9 @@ const App = (function (UI) {
 
   return {
     init: async function () {
+      UI.clearUserInput();
       //cargar en modelo
       await initInformation();
-      //añadir primera pregunta a pantalla de trivia
-      loadInitialQuestion();
       //carga de event listeners
       loadEventListeners();
     },

@@ -113,7 +113,12 @@ const UI = (function () {
         document.querySelector(UISelectors.newAnswerThree).value="";
         document.querySelector(UISelectors.correctAnswer).value="";
         document.querySelector(UISelectors.newQuestionCategory).value="Facil";
+    },
+
+    clearUserInput : function(){
+        document.querySelector(UI.getSelectors().userInput).value = "";
     }
+
   };
 })();
 
