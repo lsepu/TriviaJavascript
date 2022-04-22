@@ -106,43 +106,68 @@ const App = (function (UI) {
     const [question, r1, r2, r3, rv, category] = newQuestionInfo;
 
     //Creación de pregunta en modelo
-    TriviaModel.addQuestion(
-      question.value,
-      r1.value,
-      r2.value,
-      r3.value,
-      rv.value,
-      category.value
-    );
-    //limpiar inputs
-    UI.clearNewQuestionInputs();
-
-    UI.switchScreen("add-question", "menu");
-    alert("Pregunta agregada satisfactoriamente");
+    if (
+      checkQuestion(question.value, r1.value, r2.value, r3.value, rv.category)
+    ) {
+      TriviaModel.addQuestion(
+        question.value,
+        r1.value,
+        r2.value,
+        r3.value,
+        rv.value,
+        category.value
+      );
+      //limpiar inputs
+      UI.clearNewQuestionInputs();
+      UI.switchScreen("add-question", "menu");
+      alert("Pregunta agregada satisfactoriamente");
+    } else {
+      alert("Por favor ingrese la información en todos los campos");
+    }
 
     //POR MOTIVOS DE DEMOSTRACIÓN, mostrar array de preguntas
     console.log(TriviaModel.getQuestions());
   };
 
+  //revisa si no es vacio
+  const checkQuestion = function (question, r1, r2, r3, rv) {
+    if (question !== "" && r1 !== "" && r2 !== "" && r3 !== "" && rv !== "") {
+      return true;
+    }
+    return false;
+  };
+
+  const checkUser = function (user) {
+    console.log(user);
+    if (user !== "") {
+      return true;
+    }
+    return false;
+  };
+
   //agregar nuevo usuario o actualizar puntos de usuario existente
   const userToPlay = function () {
-    console.log('Crear usuario e iniciar nueva partida');
+    //limpiar input
+    console.log("Crear usuario e iniciar nueva partida");
     const userInput = document.querySelector(UI.getSelectors().userInput);
     const userName = userInput.value;
-    //se crea el nuevo objeto usuario con params: username, points
-    const user = TriviaModel.addUser(userName, 0);
-    TriviaModel.setCurrentUser(user);
-    
-    //limpiar input
-    UI.clearUserInput();
 
-    showNewQuestion("Iniciar");
-    UI.switchScreen("new-player", "trivia");
+    if (checkUser(userName)) {
+      //se crea el nuevo objeto usuario con params: username, points
+      const user = TriviaModel.addUser(userName, 0);
+      TriviaModel.setCurrentUser(user);
+      showNewQuestion("Iniciar");
+      UI.switchScreen("new-player", "trivia");
+    } else {
+      alert("Ingrese un nombre de usuario");
+    }
+
+    UI.clearUserInput();
   };
 
   //selección de respuesta
   const answerSelected = function (e) {
-    console.log('Respuesta seleccionada');
+    console.log("Respuesta seleccionada");
     let currentQuestion = TriviaModel.getCurrentQuestion();
     let answer = e.target.value;
     //revisa si respondio correctamente o no
