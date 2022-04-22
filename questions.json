@@ -101,7 +101,7 @@
         "r2" : "Boston",
         "r3" : "Toronto",
         "rv" : "Londres",
-        "category" : "Legendario"
+        "category" : "Dificil"
     },
     {
         "question" : "Dia de la independecia de Colombia",
@@ -109,7 +109,7 @@
         "r2" : "7 septiembre",
         "r3" : "3 Octubre",
         "rv" : "20 Julio",
-        "category" : "Legendario"
+        "category" : "Dificil"
     },
     {
         "question" : "Cuantos lados tiene un exagono",
@@ -117,7 +117,7 @@
         "r2" : "1",
         "r3" : "3",
         "rv" : "6",
-        "category" : "Legendario"
+        "category" : "Dificil"
     },
     {
         "question" : "Cuantas patas tiene un gato",
@@ -125,7 +125,7 @@
         "r2" : "3",
         "r3" : "2",
         "rv" : "4",
-        "category" : "Legendario"
+        "category" : "Muy dificil"
     },
     {
         "question" : "Cuál es la capital España",
@@ -133,7 +133,7 @@
         "r2" : "París",
         "r3" : "Valencia",
         "rv" : "Madrid",
-        "category" : "Legendario"
+        "category" : "Muy dificil"
     },
     {
         "question" : "Cuál de los siguientes no es mamífero",
@@ -141,7 +141,7 @@
         "r2" : "perro",
         "r3" : "Gato",
         "rv" : "Lagartija",
-        "category" : "Legendario"
+        "category" : "Muy dificil"
     },
     {
         "question" : "Cuál de los siguientes piases no pertenece al continente europeo",
@@ -149,7 +149,7 @@
         "r2" : "Francia",
         "r3" : "Inglaterra",
         "rv" : "Japón",
-        "category" : "Legendario"
+        "category" : "Muy dificil"
     },
     {
         "question" : "La raíz cuadrada de 144 es:",
@@ -157,7 +157,7 @@
         "r2" : "10",
         "r3" : "16",
         "rv" : "12",
-        "category" : "Legendario"
+        "category" : "Muy dificil"
     },
     {
         "question" : "En qué continente está ubicado el país Belice",
